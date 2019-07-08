@@ -1,4 +1,4 @@
-# tomato_clock
+# Tomato_Clock
 
 ## Project setup
 ```
