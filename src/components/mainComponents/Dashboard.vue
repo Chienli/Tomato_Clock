@@ -6,7 +6,10 @@
     </div>
     <div class="timebox">
       <div>THE FIRST THING TO DO TODAY</div>
-      <div>25:00</div>
+      <div v-if="seconds < 10 && minutes >= 10">{{minutes + ":0" + seconds}}</div>
+      <div v-else-if="seconds < 10 && minutes < 10">{{ "0" + minutes + ":0" + seconds}}</div>
+      <div v-else-if="seconds >= 10 && minutes < 10">{{ "0" + minutes + ":" + seconds}}</div>
+      <div v-else-if="seconds >= 10  && minutes >= 10">{{minutes + ":" + seconds}}</div>
     </div>
     <div class="listbox">
       <div class="list">THE SECOND THING TO DO TODAY</div>
@@ -18,7 +21,15 @@
 </template>
 <script>
 export default {
-  name: "Dashboard"
+  name: "Dashboard",
+  props: {
+    minutes: {
+      type: Number
+    },
+    seconds: {
+      type: Number
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

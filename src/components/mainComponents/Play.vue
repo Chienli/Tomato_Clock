@@ -1,13 +1,18 @@
 <template>
   <div class="play">
     <div class="circle">
-      <button></button>
+      <button @click="start"></button>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "Play"
+  name: "Play",
+  methods: {
+    start: function() {
+      this.$emit("startTimer");
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

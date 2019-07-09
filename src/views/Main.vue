@@ -1,12 +1,12 @@
 <template>
   <div class="mainview">
     <div class="leftview">
-      <Dashboard />
+      <Dashboard :minutes="minutes" :seconds="seconds" />
     </div>
     <div class="rightview">
       <Navbar />
     </div>
-    <play />
+    <play @startTimer="start" />
   </div>
 </template>
 <script>
@@ -16,6 +16,29 @@ import Navbar from "../components/mainComponents/Navbar.vue";
 
 export default {
   name: "Main",
+  data: function() {
+    return {
+      total: 25,
+      minutes: 25,
+      seconds: 0,
+      intervalId: 0
+    };
+  },
+  methods: {
+    start: function() {
+      let vm = this;
+      vm.minutes = vm.total;
+      vm.intervalId = setInterval(() => {
+        if (vm.seconds % 60 === 0) {
+          vm.seconds = vm.minutes * 60;
+          vm.minutes--;
+        }
+        vm.seconds--;
+        vm.seconds = vm.seconds % 60;
+        console.log(vm.minutes, vm.seconds);
+      }, 1000);
+    }
+  },
   components: {
     Play,
     Dashboard,
