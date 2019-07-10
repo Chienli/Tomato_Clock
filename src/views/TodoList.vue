@@ -1,9 +1,16 @@
 <template>
-  <div class="todoListView"></div>
+  <div class="todoListView">
+    <NavButton />
+  </div>
 </template>
 <script>
+import NavButton from "../components/todoListComponents/NavButton.vue";
+
 export default {
-  name: "todoList"
+  name: "todoList",
+  components: {
+    NavButton
+  }
 };
 </script>
 <style lang="scss" scope d>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Main />
-    <!-- <TodoList /> -->
+    <!-- <Main /> -->
+    <TodoList />
   </div>
 </template>
 
