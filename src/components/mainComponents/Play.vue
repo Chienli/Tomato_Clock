@@ -1,16 +1,25 @@
 <template>
   <div class="play">
     <div class="circle">
-      <button @click="start"></button>
+      <button
+        @click="controlTimer(isPlay)"
+        :class="{btn:true , btn_stop: isPlay , btn_play: !isPlay }"
+      ></button>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "Play",
+  data: function() {
+    return {
+      isPlay: false
+    };
+  },
   methods: {
-    start: function() {
-      this.$emit("startTimer");
+    controlTimer: function(isPlay) {
+      this.isPlay = !this.isPlay;
+      this.$emit("handleTimer", !isPlay);
     }
   }
 };
@@ -37,7 +46,7 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  button {
+  .btn {
     width: 96px;
     height: 96px;
     background-color: #fff;
@@ -45,6 +54,17 @@ export default {
     border-radius: 100%;
     outline: none;
     position: relative;
+
+    &::after {
+      content: "■";
+      color: #ffffff;
+      font-size: 20px;
+      position: absolute;
+      right: -20px;
+      bottom: 0px;
+    }
+  }
+  .btn_play {
     &::before {
       content: "▶";
       color: #ff4384;
@@ -53,13 +73,17 @@ export default {
       left: 36px;
       top: 25px;
     }
-    &::after {
-      content: "■";
-      color: #ffffff;
-      font-size: 20px;
+  }
+  .btn_stop {
+    &::before {
+      content: "=";
+      color: #ff4384;
+      font-size: 80px;
       position: absolute;
-      right: -20px;
-      bottom: 0px;
+      font-weight: bold;
+      transform: rotate(90deg);
+      left: 24px;
+      top: 4px;
     }
   }
 }

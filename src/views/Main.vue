@@ -6,7 +6,7 @@
     <div class="rightview">
       <Navbar />
     </div>
-    <play @startTimer="start" />
+    <play @handleTimer="handleTimer" />
   </div>
 </template>
 <script>
@@ -18,25 +18,26 @@ export default {
   name: "Main",
   data: function() {
     return {
-      total: 25,
       minutes: 25,
       seconds: 0,
       intervalId: 0
     };
   },
   methods: {
-    start: function() {
-      let vm = this;
-      vm.minutes = vm.total;
-      vm.intervalId = setInterval(() => {
-        if (vm.seconds % 60 === 0) {
-          vm.seconds = vm.minutes * 60;
-          vm.minutes--;
-        }
-        vm.seconds--;
-        vm.seconds = vm.seconds % 60;
-        console.log(vm.minutes, vm.seconds);
-      }, 1000);
+    handleTimer: function(isPlay) {
+      if (isPlay) {
+        let vm = this;
+        vm.intervalId = setInterval(() => {
+          if (vm.seconds % 60 === 0) {
+            vm.seconds = vm.minutes * 60;
+            vm.minutes--;
+          }
+          vm.seconds--;
+          vm.seconds = vm.seconds % 60;
+        }, 1000);
+      } else {
+        window.clearInterval(this.intervalId);
+      }
     }
   },
   components: {
