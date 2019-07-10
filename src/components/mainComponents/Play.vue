@@ -1,9 +1,9 @@
 <template>
-  <div class="play">
-    <div class="circle">
+  <div :class="{play : true , red_border: !color , blue_border: color}">
+    <div :class="{circle : true , red_bg: !color , blue_bg: color}">
       <button
         @click="controlTimer(isPlay)"
-        :class="{btn:true , btn_stop: isPlay , btn_play: !isPlay }"
+        :class="{btn:true , btn_stop: isPlay , btn_play: !isPlay, red: !color , blue: color }"
       ></button>
     </div>
   </div>
@@ -15,6 +15,11 @@ export default {
     return {
       isPlay: false
     };
+  },
+  props: {
+    color: {
+      type: Boolean
+    }
   },
   methods: {
     controlTimer: function(isPlay) {
@@ -30,7 +35,7 @@ export default {
   height: 540px;
   background-color: transparent;
   border-radius: 100%;
-  border: 4px solid #ff4384;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,13 +45,13 @@ export default {
   .circle {
     width: 520px;
     height: 520px;
-    background-color: #ff4384;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .btn {
+    cursor: pointer;
     width: 96px;
     height: 96px;
     background-color: #fff;
@@ -54,7 +59,6 @@ export default {
     border-radius: 100%;
     outline: none;
     position: relative;
-
     &::after {
       content: "■";
       color: #ffffff;
@@ -67,7 +71,6 @@ export default {
   .btn_play {
     &::before {
       content: "▶";
-      color: #ff4384;
       font-size: 42px;
       position: absolute;
       left: 36px;
@@ -77,7 +80,6 @@ export default {
   .btn_stop {
     &::before {
       content: "=";
-      color: #ff4384;
       font-size: 80px;
       position: absolute;
       font-weight: bold;
@@ -86,5 +88,23 @@ export default {
       top: 4px;
     }
   }
+}
+.red_bg {
+  background-color: #ff4384;
+}
+.blue_bg {
+  background-color: #00a7ff;
+}
+.red_border {
+  border: 4px solid #ff4384;
+}
+.blue_border {
+  border: 4px solid #00a7ff;
+}
+.red {
+  color: #ff4384;
+}
+.blue {
+  color: #00a7ff;
 }
 </style>

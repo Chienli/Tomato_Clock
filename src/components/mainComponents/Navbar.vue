@@ -34,6 +34,8 @@ export default {
       background-size: cover;
       width: 28px;
       height: 28px;
+      cursor: pointer;
+
       &.menu {
         background-image: url(../../../public/baseline_menu_white_18dp.png);
       }

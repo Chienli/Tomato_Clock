@@ -1,12 +1,12 @@
 <template>
   <div class="mainview">
-    <div class="leftview">
-      <Dashboard :minutes="minutes" :seconds="seconds" />
+    <div class="leftview" :style="{background: timerColor ? '#E5F3FF' : '#FFEDF7'}">
+      <Dashboard :minutes="minutes" :seconds="seconds" :color="timerColor" />
     </div>
     <div class="rightview">
       <Navbar />
     </div>
-    <play @handleTimer="handleTimer" />
+    <play @handleTimer="handleTimer" :color="timerColor" />
   </div>
 </template>
 <script>
@@ -37,6 +37,23 @@ export default {
         }, 1000);
       } else {
         window.clearInterval(this.intervalId);
+      }
+    }
+  },
+  computed: {
+    timerColor: function() {
+      if (this.minutes <= 4) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    stopTimer: function() {
+      if (this.minutes === 0 && this.seconds === 0) {
+        window.clearInterval(this.intervalId);
+        return "the timer is stop";
+      } else {
+        return "Not yet";
       }
     }
   },

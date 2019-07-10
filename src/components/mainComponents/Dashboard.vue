@@ -1,21 +1,38 @@
 <template>
   <div class="dashboard">
     <div class="inputBox">
-      <label for="addNewMission">+</label>
-      <input type="text" id="addNewMission" placeholder="ADD A NEW MISSION…" />
+      <label for="addNewMission" :style="{color : color? '#00A7FF':'#ff4384'}">+</label>
+      <input
+        type="text"
+        id="addNewMission"
+        placeholder="ADD A NEW MISSION…"
+        :class="{red: !color , blue: color }"
+      />
     </div>
     <div class="timebox">
       <div>THE FIRST THING TO DO TODAY</div>
-      <div v-if="seconds < 10 && minutes >= 10">{{minutes + ":0" + seconds}}</div>
-      <div v-else-if="seconds < 10 && minutes < 10">{{ "0" + minutes + ":0" + seconds}}</div>
-      <div v-else-if="seconds >= 10 && minutes < 10">{{ "0" + minutes + ":" + seconds}}</div>
-      <div v-else-if="seconds >= 10  && minutes >= 10">{{minutes + ":" + seconds}}</div>
+      <div
+        v-if="seconds < 10 && minutes >= 10"
+        :style="{color : color? '#00A7FF':'#ff4384'}"
+      >{{minutes + ":0" + seconds}}</div>
+      <div
+        v-else-if="seconds < 10 && minutes < 10"
+        :style="{color : color?'#00A7FF':'#ff4384'}"
+      >{{ "0" + minutes + ":0" + seconds}}</div>
+      <div
+        v-else-if="seconds >= 10 && minutes < 10"
+        :style="{color : color?'#00A7FF':'#ff4384'}"
+      >{{ "0" + minutes + ":" + seconds}}</div>
+      <div
+        v-else-if="seconds >= 10  && minutes >= 10"
+        :style="{color : color?'#00A7FF':'#ff4384'}"
+      >{{minutes + ":" + seconds}}</div>
     </div>
     <div class="listbox">
       <div class="list">THE SECOND THING TO DO TODAY</div>
       <div class="list">THE THIRD THING TO DO TODAY</div>
       <div class="list">THE FORTH THING TO DO TODAY</div>
-      <div class="more">MORE</div>
+      <div class="more" :style="{color : color? '#00A7FF':'#ff4384'}">MORE</div>
     </div>
   </div>
 </template>
@@ -28,6 +45,9 @@ export default {
     },
     seconds: {
       type: Number
+    },
+    color: {
+      type: Boolean
     }
   }
 };
@@ -44,7 +64,6 @@ export default {
   .inputBox {
     position: relative;
     label[for="addNewMission"] {
-      color: #ff4384;
       font-size: 26px;
       font-family: "roboto";
       position: absolute;
@@ -58,13 +77,11 @@ export default {
       padding: 0 15px;
       outline: none;
       border: none;
-      color: #ff4384;
       font-weight: bold;
       font-size: 18px;
       font-style: italic;
       &::placeholder {
         font-family: "roboto";
-        color: #ff4384;
         font-weight: bold;
         font-style: italic;
         font-size: 16px;
@@ -117,6 +134,7 @@ export default {
     justify-content: space-between;
     position: relative;
     .list {
+      cursor: pointer;
       width: 100%;
       height: 32px;
       border-bottom: 1px solid #cccccc;
@@ -153,7 +171,18 @@ export default {
       font-size: 14px;
       bottom: -28px;
       right: 0px;
+      cursor: pointer;
     }
+  }
+}
+.red {
+  &::placeholder {
+    color: #ff4384;
+  }
+}
+.blue {
+  &::placeholder {
+    color: #00a7ff;
   }
 }
 </style>
