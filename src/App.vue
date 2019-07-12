@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Main />
+    <!-- <Main /> -->
+    <TodoList/>
   </div>
 </template>
 
 <script>
 import Main from "./views/Main.vue"
+import TodoList from "./views/TodoList.vue"
 
 export default {
   name: "app",
   components: {
-    Main
+    Main,
+    TodoList
   }
 };
 </script>
