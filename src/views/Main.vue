@@ -1,10 +1,10 @@
 <template>
   <div class="mainview">
     <div class="leftview" :style="{background: timerColor ? '#E5F3FF' : '#FFEDF7'}">
-      <Dashboard :minutes="minutes" :seconds="seconds" :color="timerColor" />
+      <Dashboard :minutes="minutes" :seconds="seconds" :color="timerColor" :todos="todos" />
     </div>
     <div class="rightview">
-      <Navbar />
+      <Navbar @handleViewState="handleViewState" />
     </div>
     <play @handleTimer="handleTimer" :color="timerColor" />
   </div>
@@ -38,6 +38,9 @@ export default {
       } else {
         window.clearInterval(this.intervalId);
       }
+    },
+    handleViewState: function(state) {
+      this.$emit("handleViewState" , state);
     }
   },
   computed: {
@@ -55,6 +58,11 @@ export default {
       } else {
         return "Not yet";
       }
+    }
+  },
+  props: {
+    todos: {
+      type: Array
     }
   },
   components: {

@@ -19,7 +19,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope d>
+<style lang="scss" >
 .inputBox {
   position: relative;
   label[for="addNewMission"] {

@@ -1,16 +1,21 @@
 <template>
   <div class="navbar">
     <div class="navtab">
-      <div class="menu" />
-      <div class="chart" />
-      <div class="music" />
+      <div class="menu" @click="handleViewState" />
+      <div class="chart" @click="handleViewState" />
+      <div class="music" @click="handleViewState" />
     </div>
     <div class="pomodoro">POMODORO</div>
   </div>
 </template>
 <script>
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  methods: {
+    handleViewState: function() {
+      this.$emit("handleViewState", 1);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
