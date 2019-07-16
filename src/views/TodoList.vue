@@ -1,5 +1,10 @@
 <template>
   <div class="todoListView">
+    <div class="circle">
+      <div class="playbtnBox">
+        <Play class="playbtn" :todoListView="true" />
+      </div>
+    </div>
     <div class="listColumn">
       <AddNewMission :color="false" />
       <div>
@@ -11,7 +16,6 @@
         <TaskListBox :class="{hidden : doneFoldState}" :todoListView="true" :todos="done" />
       </div>
     </div>
-    <Play class="playbtn" :todoListView="true" />
   </div>
 </template>
 <script>
@@ -67,7 +71,6 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  position: relative;
   .listColumn {
     width: 455px;
     height: 100%;
@@ -76,10 +79,27 @@ export default {
     align-items: center;
     justify-content: space-evenly;
   }
-  .playbtn {
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
+  .circle {
+    width: 350px;
+    height: 350px;
+    background-color: #ffedf7;
+    border-radius: 100%;
+    position: relative;
+    .playbtnBox {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 0px;
+      top:0px;
+      background-color: #003164;
+      .playbtn {
+        
+      }
+    }
   }
 }
 .hidden {

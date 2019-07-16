@@ -113,6 +113,9 @@ export default {
   width: 96px;
   height: 96px;
   background-color: #003164;
+  position: static;
+  left: 0px;
+  top: 0px;
   .circle {
     width: 76px;
     height: 76px;
