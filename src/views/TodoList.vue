@@ -24,6 +24,10 @@
         <TaskListBox :class="{hidden : doneFoldState}" :todoListView="true" :todos="done" />
       </div>
     </div>
+    <div class="navbar">
+      <div @click="handleViewState" class="cross">✖</div>
+      <div class="pomodoro">POMODORO</div>
+    </div>
   </div>
 </template>
 <script>
@@ -95,7 +99,7 @@ export default {
   height: 100%;
   background-color: #003164;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   position: relative;
   .listColumn {
@@ -138,6 +142,33 @@ export default {
         justify-content: center;
         background-color: #003164;
       }
+    }
+  }
+  .navbar {
+    width: 36px;
+    height: 700px;
+    margin-left: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .cross {
+     color: white;
+      font-size: 30px;
+      font-weight: bold;
+      font-family: "roboto";
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+    .pomodoro {
+      color: white;
+      transform: rotate(90deg);
+      font-size: 24px;
+      font-weight: bold;
+      font-family: "roboto";
+      margin: 0 0 50px 0;
     }
   }
 }
