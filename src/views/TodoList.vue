@@ -1,8 +1,10 @@
 <template>
   <div class="todoListView">
-    <div class="circle">
-      <div class="playbtnBox">
-        <Play class="playbtn" :todoListView="true" />
+    <div class="timerBox">
+      <div class="halfCircle">
+        <div class="playbtnBox">
+          <Play class="playbtn" :todoListView="true" />
+        </div>
       </div>
     </div>
     <div class="listColumn">
@@ -71,6 +73,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
   .listColumn {
     width: 455px;
     height: 100%;
@@ -79,25 +82,28 @@ export default {
     align-items: center;
     justify-content: space-evenly;
   }
-  .circle {
-    width: 350px;
-    height: 350px;
-    background-color: #ffedf7;
-    border-radius: 100%;
-    position: relative;
-    .playbtnBox {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      left: 0px;
-      top:0px;
-      background-color: #003164;
-      .playbtn {
-        
+  .timerBox {
+    position: absolute;
+    left: 85px;
+    bottom: 0px;
+    .halfCircle {
+      width: 350px;
+      height: 175px;
+      background-color: #ffedf7;
+      border-top-left-radius: 350px;
+      border-top-right-radius: 350px;
+      position: relative;
+      .playbtnBox {
+        position: absolute;
+        top: -60px;
+        left: 115px;
+        width: 120px;
+        height: 120px;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #003164;
       }
     }
   }

@@ -1,9 +1,27 @@
 <template>
-  <div :class="{play : true , red_border: !color , blue_border: color, size:todoListView}">
-    <div :class="{circle : true , red_bg: !color , blue_bg: color}">
+  <div
+    :class="{
+      play : true ,
+      red_border: !color ,
+      blue_border: color,
+      size:todoListView
+      }"
+  >
+    <div :class="{
+      circle : true ,
+      red_bg: !color ,
+      blue_bg: color
+      }">
       <button
         @click="controlTimer(isPlay)"
-        :class="{btn:true , btn_stop: isPlay , btn_play: !isPlay, red: !color , blue: color }"
+        :class="{
+          btn:true ,
+          btn_stop: isPlay ,
+          btn_play: !isPlay,
+          red: !color , blue: color ,
+          todo_btn_play:todoListView ,
+          todo_btn_stop:todoListView 
+        }"
       ></button>
     </div>
   </div>
@@ -129,17 +147,21 @@ export default {
       content: "";
     }
   }
-  .btn_play {
-    font-size: 16px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+  .todo_btn_play:not(.btn_stop) {
+    &::before {
+      font-size: 36px;
+      position: absolute;
+      left: 0px;
+      top: -8px;
+    }
   }
-  .btn_stop {
-    font-size: 14px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
+  .todo_btn_stop:not(.btn_play) {
+    &::before {
+      font-size: 56px;
+      position: absolute;
+      left: -8px;
+      top: -20px;
+    }
   }
 }
 </style>
