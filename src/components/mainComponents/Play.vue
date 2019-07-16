@@ -1,5 +1,5 @@
 <template>
-  <div :class="{play : true , red_border: !color , blue_border: color}">
+  <div :class="{play : true , red_border: !color , blue_border: color, size:todoListView}">
     <div :class="{circle : true , red_bg: !color , blue_bg: color}">
       <button
         @click="controlTimer(isPlay)"
@@ -19,6 +19,9 @@ export default {
   props: {
     color: {
       type: Boolean
+    },
+    todoListView: {
+      type: Boolean
     }
   },
   methods: {
@@ -35,7 +38,6 @@ export default {
   height: 540px;
   background-color: transparent;
   border-radius: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,5 +108,35 @@ export default {
 }
 .blue {
   color: #00a7ff;
+}
+.size {
+  width: 96px;
+  height: 96px;
+  background-color: #003164;
+  .circle {
+    width: 76px;
+    height: 76px;
+  }
+  .btn {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    color: white;
+    &::after {
+      content: "";
+    }
+  }
+  .btn_play {
+    font-size: 16px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+  .btn_stop {
+    font-size: 14px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
 }
 </style>

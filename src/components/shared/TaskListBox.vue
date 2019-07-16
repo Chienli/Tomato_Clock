@@ -1,8 +1,8 @@
 <template>
   <div class="listbox">
-    <div :class="{list:true , color_white:color}" v-for="(todo,index) in todos" :key="index">
+    <div :class="{list:true , color_white:todoListView}" v-for="(todo,index) in todos" :key="index">
       {{todo.title}}
-      <div :class="{playbtn:true  , border_color_white:color}">▶</div>
+      <div :class="{playbtn:true  , border_color_white:todoListView}">▶</div>
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   name: "taskListBox",
   props: {
-    color: {
+    todoListView: {
       type: Boolean
     },
     todos: {
@@ -53,10 +53,9 @@ export default {
     .playbtn {
       box-sizing: border-box;
       position: absolute;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       font-size: 14px;
-      padding: 0 0 0 2px;
       text-align: center;
       line-height: 20px;
       top: 0px;

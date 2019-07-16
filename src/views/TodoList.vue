@@ -1,23 +1,24 @@
 <template>
   <div class="todoListView">
-    <button @click="handleViewState">Change View</button>
     <div class="listColumn">
       <AddNewMission :color="false" />
       <div>
         <ListHeader :title="'TODO'" :foldState="todoFoldState" @handleFold="handleFold" />
-        <TaskListBox :class="{hidden : todoFoldState}" :color="true" :todos="todos" />
+        <TaskListBox :class="{hidden : todoFoldState}" :todoListView="true" :todos="todos" />
       </div>
       <div>
         <ListHeader :title="'DONE'" :foldState="doneFoldState" @handleFold="handleFold" />
-        <TaskListBox :class="{hidden : doneFoldState}" :color="true" :todos="done" />
+        <TaskListBox :class="{hidden : doneFoldState}" :todoListView="true" :todos="done" />
       </div>
     </div>
+    <Play class="playbtn" :todoListView="true" />
   </div>
 </template>
 <script>
 import AddNewMission from "../components/shared/AddNewMission.vue";
 import TaskListBox from "../components/shared/TaskListBox.vue";
 import ListHeader from "../components/todoListComponents/ListHeader.vue";
+import Play from "../components/mainComponents/Play";
 
 export default {
   name: "todoList",
@@ -53,7 +54,8 @@ export default {
   components: {
     AddNewMission,
     TaskListBox,
-    ListHeader
+    ListHeader,
+    Play
   }
 };
 </script>
@@ -65,6 +67,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
   .listColumn {
     width: 455px;
     height: 100%;
@@ -72,6 +75,11 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+  }
+  .playbtn {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
   }
 }
 .hidden {
