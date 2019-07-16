@@ -6,7 +6,6 @@
       :todos="todos"
       :done="done"
       @handleViewState="handleViewState"
-      :viewState="viewState"
     />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <div @click="handleFold" class="listHeader" :title="title">
-    <div class="updown">▲</div>
+  <div @click="handleFold" :class="{listHeader:true}" :title="title">
+    <div :class="{updown:true , rotateArrow : foldState}">▲</div>
     {{title}}
   </div>
 </template>
@@ -15,6 +15,9 @@ export default {
   props: {
     title: {
       type: String
+    },
+    foldState: {
+      type: Boolean
     }
   }
 };
@@ -23,6 +26,7 @@ export default {
 .listHeader {
   width: 445px;
   height: 44px;
+  margin-bottom: 16px;
   background-color: #335a83;
   line-height: 44px;
   color: white;

@@ -1,17 +1,17 @@
 <template>
   <div class="todoListView">
+    <button @click="handleViewState">Change View</button>
     <div class="listColumn">
       <AddNewMission :color="false" />
       <div>
-        <ListHeader :title="'TO-DO'" @handleFold="handleFold" />
-        <TaskListBox :viewState="viewState" :todos="todos" />
+        <ListHeader :title="'TODO'" :foldState="todoFoldState" @handleFold="handleFold" />
+        <TaskListBox :class="{hidden : todoFoldState}" :color="true" :todos="todos" />
       </div>
       <div>
-        <ListHeader :title="'DONE'" @handleFold="handleFold" />
-        <TaskListBox :viewState="viewState" :todos="done" />
+        <ListHeader :title="'DONE'" :foldState="doneFoldState" @handleFold="handleFold" />
+        <TaskListBox :class="{hidden : doneFoldState}" :color="true" :todos="done" />
       </div>
     </div>
-    <button @click="handleViewState">Change View</button>
   </div>
 </template>
 <script>
@@ -21,6 +21,12 @@ import ListHeader from "../components/todoListComponents/ListHeader.vue";
 
 export default {
   name: "todoList",
+  data: function() {
+    return {
+      todoFoldState: false,
+      doneFoldState: false
+    };
+  },
   props: {
     todos: {
       type: Array
@@ -37,7 +43,11 @@ export default {
       this.$emit("handleViewState", 0);
     },
     handleFold: function(e) {
-      console.log(e.target.title);
+      if (e.target.title === "TODO") {
+        this.todoFoldState = !this.todoFoldState;
+      } else {
+        this.doneFoldState = !this.doneFoldState;
+      }
     }
   },
   components: {
@@ -63,6 +73,9 @@ export default {
     align-items: center;
     justify-content: space-evenly;
   }
+}
+.hidden {
+  visibility: hidden;
 }
 </style>
 

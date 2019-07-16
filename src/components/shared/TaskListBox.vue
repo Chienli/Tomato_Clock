@@ -1,12 +1,9 @@
 <template>
   <div class="listbox">
-    <div
-      class="list"
-      v-for="(todo,index) in todos"
-      :key="index"
-      :style="{color:isThisView ? '#ffffff' : '#003164'}"
-    >{{todo.title}}</div>
-    <div v-if="viewState !== 1" class="more" :style="{color : color? '#00A7FF':'#ff4384'}">MORE</div>
+    <div :class="{list:true , color_white:color}" v-for="(todo,index) in todos" :key="index">
+      {{todo.title}}
+      <div :class="{playbtn:true  , border_color_white:color}">▶</div>
+    </div>
   </div>
 </template>
 <script>
@@ -18,18 +15,6 @@ export default {
     },
     todos: {
       type: Array
-    },
-    viewState: {
-      type: Number
-    }
-  },
-  computed: {
-    isThisView: function() {
-      if (this.viewState === 1) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 };
@@ -37,21 +22,24 @@ export default {
 <style lang="scss">
 .listbox {
   width: 445px;
-  height: 112px;
+  height: 128px;
   color: #003164;
   font-weight: bold;
   font-size: 16px;
   font-family: "roboto";
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
+  overflow-y: auto;
   .list {
     cursor: pointer;
     width: 100%;
     height: 32px;
     border-bottom: 1px solid #cccccc;
     line-height: 32px;
+    margin-bottom: 9px;
     padding: 0 25px;
     position: relative;
     box-sizing: border-box;
@@ -62,31 +50,28 @@ export default {
       left: 0px;
       top: -3px;
     }
-    &::after {
-      content: "▶";
-      position: absolute;
-      right: 0px;
-      border-radius: 100%;
-      border: #003164 solid 2px;
-      width: 20px;
-      height: 20px;
-      text-align: center;
-      font-size: 12px;
-      padding-left: 2px;
-      line-height: 18px;
+    .playbtn {
       box-sizing: border-box;
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      font-size: 14px;
+      padding: 0 0 0 2px;
+      text-align: center;
+      line-height: 20px;
+      top: 0px;
+      right: 0px;
+      border-width: 2px;
+      border-color: #003164;
+      border-style: solid;
+      border-radius: 100%;
     }
   }
-  .more {
-    position: absolute;
-    color: #ff4384;
-    font-weight: bold;
-    font-size: 14px;
-    bottom: -28px;
-    right: 0px;
-    cursor: pointer;
-  }
+}
+.color_white {
+  color: white;
+}
+.border_color_white {
+  border-color: white !important ;
 }
 </style>
-
-

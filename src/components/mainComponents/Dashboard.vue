@@ -20,7 +20,10 @@
         :style="{color : color?'#00A7FF':'#ff4384'}"
       >{{minutes + ":" + seconds}}</div>
     </div>
-    <TaskListBox :todos="todos" />
+    <div :style="{position:'relative'}">
+      <TaskListBox :todos="todos" />
+      <div class="more" :style="{color : color? '#00A7FF':'#ff4384'}">MORE</div>
+    </div>
   </div>
 </template>
 <script>
@@ -91,5 +94,15 @@ export default {
       }
     }
   }
+}
+.more {
+  font-family: "roboto";
+  position: absolute;
+  color: #ff4384;
+  font-weight: bold;
+  font-size: 14px;
+  bottom: -28px;
+  right: 0px;
+  cursor: pointer;
 }
 </style>
