@@ -2,8 +2,14 @@
   <div class="todoListView">
     <div class="timerBox">
       <div class="halfCircle">
+        <div class="time">
+          <div v-if="seconds < 10 && minutes >= 10">{{minutes + ":0" + seconds}}</div>
+          <div v-else-if="seconds < 10 && minutes < 10">{{ "0" + minutes + ":0" + seconds}}</div>
+          <div v-else-if="seconds >= 10 && minutes < 10">{{ "0" + minutes + ":" + seconds}}</div>
+          <div v-else-if="seconds >= 10  && minutes >= 10">{{minutes + ":" + seconds}}</div>
+        </div>
         <div class="playbtnBox">
-          <Play class="playbtn" :todoListView="true" />
+          <Play :isPlay="isPlay" @handleTimer="handleTimer" class="playbtn" :todoListView="true" />
         </div>
       </div>
     </div>
@@ -43,6 +49,21 @@ export default {
     },
     viewState: {
       type: Number
+    },
+    minutes: {
+      type: Number
+    },
+    seconds: {
+      type: Number
+    },
+    intervalId: {
+      type: Number
+    },
+    isPlay: {
+      type: Boolean
+    },
+    viewState: {
+      type: Boolean
     }
   },
   methods: {
@@ -55,6 +76,9 @@ export default {
       } else {
         this.doneFoldState = !this.doneFoldState;
       }
+    },
+    handleTimer: function(isplay) {
+      this.$emit("handleTimer", isplay);
     }
   },
   components: {
@@ -93,6 +117,15 @@ export default {
       border-top-left-radius: 350px;
       border-top-right-radius: 350px;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .time {
+        font-size: 64px;
+        font-family: "roboto";
+        font-weight: bold;
+        color: #ff4384;
+      }
       .playbtnBox {
         position: absolute;
         top: -60px;

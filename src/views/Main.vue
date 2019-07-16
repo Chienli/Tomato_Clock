@@ -6,7 +6,7 @@
     <div class="rightview">
       <Navbar @handleViewState="handleViewState" />
     </div>
-    <play @handleTimer="handleTimer" :color="timerColor" />
+    <play :isPlay="isPlay" @handleTimer="handleTimer" :color="timerColor" />
   </div>
 </template>
 <script>
@@ -16,53 +16,32 @@ import Navbar from "../components/mainComponents/Navbar.vue";
 
 export default {
   name: "Main",
-  data: function() {
-    return {
-      minutes: 25,
-      seconds: 0,
-      intervalId: 0
-    };
-  },
   methods: {
-    handleTimer: function(isPlay) {
-      if (isPlay) {
-        let vm = this;
-        vm.intervalId = setInterval(() => {
-          if (vm.seconds % 60 === 0) {
-            vm.seconds = vm.minutes * 60;
-            vm.minutes--;
-          }
-          vm.seconds--;
-          vm.seconds = vm.seconds % 60;
-        }, 1000);
-      } else {
-        window.clearInterval(this.intervalId);
-      }
-    },
     handleViewState: function(state) {
-      this.$emit("handleViewState" , state);
-    }
-  },
-  computed: {
-    timerColor: function() {
-      if (this.minutes <= 4) {
-        return true;
-      } else {
-        return false;
-      }
+      this.$emit("handleViewState", state);
     },
-    stopTimer: function() {
-      if (this.minutes === 0 && this.seconds === 0) {
-        window.clearInterval(this.intervalId);
-        return "the timer is stop";
-      } else {
-        return "Not yet";
-      }
+    handleTimer: function(isplay) {
+      this.$emit("handleTimer", isplay);
     }
   },
   props: {
     todos: {
       type: Array
+    },
+    minutes: {
+      type: Number
+    },
+    seconds: {
+      type: Number
+    },
+    intervalId: {
+      type: Number
+    },
+    isPlay: {
+      type: Boolean
+    },
+    timerColor: {
+      type: Boolean
     }
   },
   components: {

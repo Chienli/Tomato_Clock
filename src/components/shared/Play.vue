@@ -18,9 +18,9 @@
           btn:true ,
           btn_stop: isPlay ,
           btn_play: !isPlay,
-          red: !color , blue: color ,
-          todo_btn_play:todoListView ,
-          todo_btn_stop:todoListView 
+          todo_btn_play: !isPlay ,
+          todo_btn_stop: isPlay,
+          red: !color , blue: color 
         }"
       ></button>
     </div>
@@ -29,22 +29,19 @@
 <script>
 export default {
   name: "Play",
-  data: function() {
-    return {
-      isPlay: false
-    };
-  },
   props: {
     color: {
       type: Boolean
     },
     todoListView: {
       type: Boolean
+    },
+    isPlay: {
+      type: Boolean
     }
   },
   methods: {
     controlTimer: function(isPlay) {
-      this.isPlay = !this.isPlay;
       this.$emit("handleTimer", !isPlay);
     }
   }
