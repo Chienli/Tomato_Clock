@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import Play from "../components/mainComponents/Play.vue";
+import Play from "../components/shared/Play.vue";
 import Dashboard from "../components/mainComponents/Dashboard.vue";
 import Navbar from "../components/mainComponents/Navbar.vue";
 

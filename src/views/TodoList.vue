@@ -18,7 +18,7 @@
 import AddNewMission from "../components/shared/AddNewMission.vue";
 import TaskListBox from "../components/shared/TaskListBox.vue";
 import ListHeader from "../components/todoListComponents/ListHeader.vue";
-import Play from "../components/mainComponents/Play";
+import Play from "../components/shared/Play.vue";
 
 export default {
   name: "todoList",
