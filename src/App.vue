@@ -36,7 +36,7 @@ export default {
       todos: [],
       done: [],
       viewState: 0,
-      minutes: 5,
+      minutes: 25,
       seconds: 0,
       intervalId: 0,
       isPlay: false

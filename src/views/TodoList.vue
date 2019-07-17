@@ -13,6 +13,12 @@
         </div>
       </div>
     </div>
+    <div class="tabListBox">
+      <div :key="index" v-for="(tab,index) in tabList" class="tabList">
+        <div :class="[tab.icon]"></div>
+        <div>{{tab.title}}</div>
+      </div>
+    </div>
     <div class="listColumn">
       <AddNewMission :color="false" />
       <div>
@@ -41,7 +47,21 @@ export default {
   data: function() {
     return {
       todoFoldState: false,
-      doneFoldState: false
+      doneFoldState: false,
+      tabList: [
+        {
+          icon: "menu",
+          title: "TO-DO LIST"
+        },
+        {
+          icon: "chart",
+          title: "ANALYTICS"
+        },
+        {
+          icon: "music",
+          title: "RINGTONES"
+        }
+      ]
     };
   },
   props: {
@@ -50,9 +70,6 @@ export default {
     },
     done: {
       type: Array
-    },
-    viewState: {
-      type: Number
     },
     minutes: {
       type: Number
@@ -147,13 +164,12 @@ export default {
   .navbar {
     width: 36px;
     height: 700px;
-    margin-left: 330px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     .cross {
-     color: white;
+      color: white;
       font-size: 30px;
       font-weight: bold;
       font-family: "roboto";
@@ -169,6 +185,47 @@ export default {
       font-weight: bold;
       font-family: "roboto";
       margin: 0 0 50px 0;
+    }
+  }
+  .tabListBox {
+    height: 700px;
+    .tabList {
+      width: 236px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 42px 0;
+      cursor: pointer;
+      img {
+        width: 36px;
+        height: 36px;
+      }
+      div:nth-child(1) {
+        width: 32px;
+        height: 32px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        &.menu {
+          background-image: url(../../public/menu_pink.png);
+        }
+        &.chart {
+          background-image: url(../../public/chart_pink.png);
+        }
+        &.music {
+          background-image: url(../../public/music_pink.png);
+        }
+      }
+      div:nth-child(2) {
+        width: 192px;
+        color: #ff4384;
+        font-family: bold;
+        font-size: 36px;
+        text-align: left;
+        font-family: "roboto";
+        font-weight: bold;
+      }
     }
   }
 }

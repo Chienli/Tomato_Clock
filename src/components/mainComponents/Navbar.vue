@@ -35,20 +35,20 @@ export default {
     align-items: center;
     justify-content: space-between;
     div {
-      background-repeat: no-repeat;
-      background-size: cover;
       width: 28px;
       height: 28px;
       cursor: pointer;
-
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       &.menu {
-        background-image: url(../../../public/baseline_menu_white_18dp.png);
+        background-image: url(../../../public/menu_white.png);
       }
       &.chart {
-        background-image: url(../../../public/baseline_insert_chart_white_18dp.png);
+        background-image: url(../../../public/chart_white.png);
       }
       &.music {
-        background-image: url(../../../public/baseline_library_music_white_18dp.png);
+        background-image: url(../../../public/music_white.png);
       }
     }
   }
