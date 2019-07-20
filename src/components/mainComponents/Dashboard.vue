@@ -1,53 +1,23 @@
 <template>
   <div class="dashboard">
-    <AddNewMission :color="color" />
+    <AddNewMission />
     <div class="timebox">
       <div>THE FIRST THING TO DO TODAY</div>
-      <div
-        v-if="seconds < 10 && minutes >= 10"
-        :style="{color : color? '#00A7FF':'#ff4384'}"
-      >{{minutes + ":0" + seconds}}</div>
-      <div
-        v-else-if="seconds < 10 && minutes < 10"
-        :style="{color : color?'#00A7FF':'#ff4384'}"
-      >{{ "0" + minutes + ":0" + seconds}}</div>
-      <div
-        v-else-if="seconds >= 10 && minutes < 10"
-        :style="{color : color?'#00A7FF':'#ff4384'}"
-      >{{ "0" + minutes + ":" + seconds}}</div>
-      <div
-        v-else-if="seconds >= 10  && minutes >= 10"
-        :style="{color : color?'#00A7FF':'#ff4384'}"
-      >{{minutes + ":" + seconds}}</div>
-    </div>
-    <div :style="{position:'relative'}">
-      <TaskListBox :todos="todos" />
-      <div class="more" :style="{color : color? '#00A7FF':'#ff4384'}">MORE</div>
+      <div>{{displayTime}}</div>
     </div>
   </div>
 </template>
 <script>
 import AddNewMission from "../shared/AddNewMission.vue";
-import TaskListBox from "../shared/TaskListBox.vue";
+
 export default {
   name: "Dashboard",
   props: {
-    minutes: {
-      type: Number
-    },
-    seconds: {
-      type: Number
-    },
-    color: {
-      type: Boolean
-    },
-    todos: {
-      type: Array
-    }
+    displayTime: String,
+    todos: Array
   },
   components: {
-    AddNewMission,
-    TaskListBox
+    AddNewMission
   }
 };
 </script>
@@ -94,15 +64,5 @@ export default {
       }
     }
   }
-}
-.more {
-  font-family: "roboto";
-  position: absolute;
-  color: #ff4384;
-  font-weight: bold;
-  font-size: 14px;
-  bottom: -28px;
-  right: 0px;
-  cursor: pointer;
 }
 </style>

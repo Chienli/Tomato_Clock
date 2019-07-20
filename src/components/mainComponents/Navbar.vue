@@ -1,20 +1,22 @@
 <template>
   <div class="navbar">
     <div class="navtab">
-      <div class="menu" @click="handleViewState" />
-      <div class="chart" @click="handleViewState" />
-      <div class="music" @click="handleViewState" />
+      <div class="menu" @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" />
+      <div class="chart" @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" />
+      <div class="music" @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" />
     </div>
     <div class="pomodoro">POMODORO</div>
   </div>
 </template>
 <script>
+import { VIEW_STATE } from "../../constant.js";
+
 export default {
   name: "Navbar",
-  methods: {
-    handleViewState: function() {
-      this.$emit("handleViewState", 1);
-    }
+  data() {
+    return {
+      VIEW_STATE
+    };
   }
 };
 </script>

@@ -1,12 +1,12 @@
 <template>
   <div class="mainview">
-    <div class="leftview" :style="{background: timerColor ? '#E5F3FF' : '#FFEDF7'}">
-      <Dashboard :minutes="minutes" :seconds="seconds" :color="timerColor" :todos="todos" />
+    <div class="leftview">
+      <Dashboard :displayTime="displayTime" :todos="todos" />
     </div>
     <div class="rightview">
-      <Navbar @handleViewState="handleViewState" />
+      <Navbar @viewChange="$listeners.viewChange" />
     </div>
-    <play :isPlay="isPlay" @handleTimer="handleTimer" :color="timerColor" />
+    <play :isPlay="isPlay" @isPlayChange="$listeners.isPlayChange" />
   </div>
 </template>
 <script>
@@ -16,33 +16,11 @@ import Navbar from "../components/mainComponents/Navbar.vue";
 
 export default {
   name: "Main",
-  methods: {
-    handleViewState: function(state) {
-      this.$emit("handleViewState", state);
-    },
-    handleTimer: function(isplay) {
-      this.$emit("handleTimer", isplay);
-    }
-  },
+  methods: {},
   props: {
-    todos: {
-      type: Array
-    },
-    minutes: {
-      type: Number
-    },
-    seconds: {
-      type: Number
-    },
-    intervalId: {
-      type: Number
-    },
-    isPlay: {
-      type: Boolean
-    },
-    timerColor: {
-      type: Boolean
-    }
+    todos: Array,
+    displayTime: String,
+    isPlay: Boolean
   },
   components: {
     Play,

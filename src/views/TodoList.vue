@@ -2,115 +2,51 @@
   <div class="todoListView">
     <div class="timerBox">
       <div class="halfCircle">
-        <div class="time">
-          <div v-if="seconds < 10 && minutes >= 10">{{minutes + ":0" + seconds}}</div>
-          <div v-else-if="seconds < 10 && minutes < 10">{{ "0" + minutes + ":0" + seconds}}</div>
-          <div v-else-if="seconds >= 10 && minutes < 10">{{ "0" + minutes + ":" + seconds}}</div>
-          <div v-else-if="seconds >= 10  && minutes >= 10">{{minutes + ":" + seconds}}</div>
-        </div>
-        <div class="playbtnBox">
-          <Play :isPlay="isPlay" @handleTimer="handleTimer" class="playbtn" :todoListView="true" />
-        </div>
+        <div class="time"></div>
+        <div class="playbtnBox"></div>
       </div>
     </div>
     <div class="tabListBox">
-      <div :key="index" v-for="(tab,index) in tabList" class="tabList">
+      <div :key="index" v-for="(tab,index) in TAB_LIST" class="tabList">
         <div :class="[tab.icon]"></div>
         <div>{{tab.title}}</div>
       </div>
     </div>
     <div class="listColumn">
       <AddNewMission :color="false" />
-      <div>
-        <ListHeader :title="'TODO'" :foldState="todoFoldState" @handleFold="handleFold" />
-        <TaskListBox :class="{hidden : todoFoldState}" :todoListView="true" :todos="todos" />
-      </div>
-      <div>
-        <ListHeader :title="'DONE'" :foldState="doneFoldState" @handleFold="handleFold" />
-        <TaskListBox :class="{hidden : doneFoldState}" :todoListView="true" :todos="done" />
-      </div>
     </div>
     <div class="navbar">
-      <div @click="handleViewState" class="cross">✖</div>
+      <div @click="$listeners.viewChange(VIEW_STATE.MAIN)" class="cross">✖</div>
       <div class="pomodoro">POMODORO</div>
     </div>
   </div>
 </template>
 <script>
 import AddNewMission from "../components/shared/AddNewMission.vue";
-import TaskListBox from "../components/shared/TaskListBox.vue";
-import ListHeader from "../components/todoListComponents/ListHeader.vue";
 import Play from "../components/shared/Play.vue";
+import { VIEW_STATE, TAB_LIST } from "../constant.js";
 
 export default {
   name: "todoList",
   data: function() {
     return {
-      todoFoldState: false,
-      doneFoldState: false,
-      tabList: [
-        {
-          icon: "menu",
-          title: "TO-DO LIST"
-        },
-        {
-          icon: "chart",
-          title: "ANALYTICS"
-        },
-        {
-          icon: "music",
-          title: "RINGTONES"
-        }
-      ]
+      TAB_LIST,
+      VIEW_STATE
     };
   },
-  props: {
-    todos: {
-      type: Array
-    },
-    done: {
-      type: Array
-    },
-    minutes: {
-      type: Number
-    },
-    seconds: {
-      type: Number
-    },
-    intervalId: {
-      type: Number
-    },
-    isPlay: {
-      type: Boolean
-    },
-    viewState: {
-      type: Boolean
-    }
-  },
-  methods: {
-    handleViewState: function() {
-      this.$emit("handleViewState", 0);
-    },
-    handleFold: function(e) {
-      if (e.target.title === "TODO") {
-        this.todoFoldState = !this.todoFoldState;
-      } else {
-        this.doneFoldState = !this.doneFoldState;
-      }
-    },
-    handleTimer: function(isplay) {
-      this.$emit("handleTimer", isplay);
-    }
-  },
+  props: ["todos"],
   components: {
     AddNewMission,
-    TaskListBox,
-    ListHeader,
     Play
   }
 };
 </script>
 <style lang="scss" scoped>
+@mixin text-base {
+  font-family: "roboto";
+  font-weight: bold;
+  color: white;
+}
 .todoListView {
   width: 100%;
   height: 100%;
@@ -142,9 +78,8 @@ export default {
       justify-content: center;
       align-items: center;
       .time {
+        @include text-base;
         font-size: 64px;
-        font-family: "roboto";
-        font-weight: bold;
         color: #ff4384;
       }
       .playbtnBox {
@@ -169,22 +104,18 @@ export default {
     align-items: center;
     justify-content: space-between;
     .cross {
-      color: white;
       font-size: 30px;
-      font-weight: bold;
-      font-family: "roboto";
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+      @include text-base;
     }
     .pomodoro {
-      color: white;
       transform: rotate(90deg);
       font-size: 24px;
-      font-weight: bold;
-      font-family: "roboto";
       margin: 0 0 50px 0;
+      @include text-base;
     }
   }
   .tabListBox {
@@ -218,19 +149,14 @@ export default {
         }
       }
       div:nth-child(2) {
+        @include text-base;
         width: 192px;
-        color: #ff4384;
-        font-family: bold;
         font-size: 36px;
         text-align: left;
-        font-family: "roboto";
-        font-weight: bold;
+        color: #ff4384;
       }
     }
   }
-}
-.hidden {
-  visibility: hidden;
 }
 </style>
 

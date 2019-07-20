@@ -1,83 +1,60 @@
 <template>
   <div id="app">
     <Main
-      :minutes="minutes"
-      :seconds="seconds"
-      :intervalId="intervalId"
+      v-if="viewState === VIEW_STATE.MAIN"
+      :displayTime="displayTime"
       :todos="todos"
-      :timerColor="timerColor"
       :isPlay="isPlay"
-      @handleViewState="handleViewState"
-      @handleTimer="handleTimer"
-      v-if="viewState === 0"
+      @viewChange="handleViewState"
+      @isPlayChange="toggleTimer"
     />
     <TodoList
-      :minutes="minutes"
-      :seconds="seconds"
-      :intervalId="intervalId"
-      :timerColor="timerColor"
       :todos="todos"
-      :done="done"
       :isPlay="isPlay"
-      @handleTimer="handleTimer"
-      @handleViewState="handleViewState"
-      v-else-if="viewState === 1"
+      @viewChange="handleViewState"
+      v-else-if="viewState === VIEW_STATE.TODOLIST"
     />
   </div>
 </template>
 
 <script>
+import numeral from 'numeral'
 import Main from "./views/Main.vue";
+import { VIEW_STATE } from "./constant.js";
 import TodoList from "./views/TodoList.vue";
+
 export default {
   name: "app",
   data: function() {
     return {
       todos: [],
-      done: [],
+      remains: 1500,
       viewState: 0,
-      minutes: 25,
-      seconds: 0,
-      intervalId: 0,
-      isPlay: false
+      isPlay: false,
+      VIEW_STATE
     };
   },
   methods: {
-    handleTimer: function(isPlay) {
-      this.isPlay = isPlay;
-      if (isPlay) {
-        let vm = this;
-        vm.intervalId = setInterval(() => {
-          if (vm.seconds % 60 === 0) {
-            vm.seconds = vm.minutes * 60;
-            vm.minutes--;
-          }
-          vm.seconds--;
-          vm.seconds = vm.seconds % 60;
-        }, 1000);
-      } else {
-        window.clearInterval(this.intervalId);
+    countDown() {
+      if (this.remains > 0 && this.isPlay) {
+        this.remains -= 1;
+        setTimeout(this.countDown, 1000);
       }
+    },
+    toggleTimer() {
+      this.isPlay = !this.isPlay;
+      this.isPlay && this.countDown();
     },
     handleViewState: function(state) {
       this.viewState = state;
     }
   },
   computed: {
-    timerColor: function() {
-      if (this.minutes <= 4) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    stopTimer: function() {
-      if (this.minutes === 0 && this.seconds === 0) {
-        window.clearInterval(this.intervalId);
-        return "the timer is stop";
-      } else {
-        return "Not yet";
-      }
+    displayTime: function() {
+      const { remains } = this;
+      return `${Math.floor(remains / 60)}:${numeral(remains % 60).format(
+        "00"
+      )}`;
     }
   },
   components: {

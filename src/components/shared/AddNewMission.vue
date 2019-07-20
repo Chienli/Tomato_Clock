@@ -1,22 +1,12 @@
 <template>
   <div class="inputBox">
-    <label for="addNewMission" :style="{color : color? '#00A7FF':'#ff4384'}">+</label>
-    <input
-      type="text"
-      id="addNewMission"
-      placeholder="ADD A NEW MISSION…"
-      :class="{red: !color , blue: color }"
-    />
+    <label for="addNewMission">+</label>
+    <input type="text" id="addNewMission" placeholder="ADD A NEW MISSION…" />
   </div>
 </template>
 <script>
 export default {
-  name: "addNewMission",
-  props: {
-    color: {
-      type: Boolean
-    }
-  }
+  name: "addNewMission"
 };
 </script>
 <style lang="scss" >
@@ -28,6 +18,8 @@ export default {
     position: absolute;
     right: 20px;
     top: 12px;
+    cursor: pointer;
+    color: #ff4384;
   }
   #addNewMission {
     width: 445px;
@@ -44,17 +36,8 @@ export default {
       font-weight: bold;
       font-style: italic;
       font-size: 16px;
+      color: #ff4384;
     }
-  }
-}
-.red {
-  &::placeholder {
-    color: #ff4384;
-  }
-}
-.blue {
-  &::placeholder {
-    color: #00a7ff;
   }
 }
 </style> 
