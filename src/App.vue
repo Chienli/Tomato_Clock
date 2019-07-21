@@ -10,19 +10,20 @@
     />
     <TodoList
       :todos="todos"
-      :isPlay="isPlay"
+      @isCompletedChange="handleCompleted"
       @viewChange="handleViewState"
+      @addTodo="addTodo"
       v-else-if="viewState === VIEW_STATE.TODOLIST"
     />
   </div>
 </template>
 
 <script>
-import numeral from 'numeral'
+import numeral from "numeral";
 import Main from "./views/Main.vue";
 import { VIEW_STATE } from "./constant.js";
 import TodoList from "./views/TodoList.vue";
-
+import _ from "lodash";
 export default {
   name: "app",
   data: function() {
@@ -47,6 +48,25 @@ export default {
     },
     handleViewState: function(state) {
       this.viewState = state;
+    },
+    addTodo(e) {
+      this.todos.push({
+        title: e.target.value,
+        timestamp: new Date().getTime(),
+        isCompleted: false
+      });
+      e.target.value = "";
+    },
+    handleCompleted(e, timestamp) {
+      let newTodos = _.cloneDeep(this.todos);
+      _.set(
+        _.find(newTodos, todo => {
+          return todo.timestamp == timestamp;
+        }),
+        "isCompleted",
+        true
+      );
+      this.todos = newTodos;
     }
   },
   computed: {

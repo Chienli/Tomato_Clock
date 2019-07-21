@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox">
-    <label for="addNewMission">+</label>
-    <input type="text" id="addNewMission" placeholder="ADD A NEW MISSION…" />
+    <label for="addNewMission" >+</label>
+    <input @keyup.enter="$listeners.addTodo" type="text" id="addNewMission" placeholder="ADD A NEW MISSION…" />
   </div>
 </template>
 <script>

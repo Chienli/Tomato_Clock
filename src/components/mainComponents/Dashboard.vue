@@ -50,7 +50,6 @@ export default {
         &::after {
           content: "○";
           position: absolute;
-          font-weight: normal;
           font-size: 100px;
           left: -65px;
           top: -45px;

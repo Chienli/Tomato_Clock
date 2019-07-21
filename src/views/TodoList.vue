@@ -13,7 +13,13 @@
       </div>
     </div>
     <div class="listColumn">
-      <AddNewMission :color="false" />
+      <AddNewMission @addTodo="$listeners.addTodo" />
+      <TaskList
+        :title="'TODO'"
+        :todos="uncompletedtodos"
+        @isCompletedChange="$listeners.isCompletedChange"
+      />
+      <TaskList  :title="'DONE'" :todos="completedtodos" />
     </div>
     <div class="navbar">
       <div @click="$listeners.viewChange(VIEW_STATE.MAIN)" class="cross">✖</div>
@@ -22,8 +28,10 @@
   </div>
 </template>
 <script>
+import _ from "lodash";
 import AddNewMission from "../components/shared/AddNewMission.vue";
 import Play from "../components/shared/Play.vue";
+import TaskList from "../components/todoListComponents/TaskList.vue";
 import { VIEW_STATE, TAB_LIST } from "../constant.js";
 
 export default {
@@ -34,10 +42,25 @@ export default {
       VIEW_STATE
     };
   },
-  props: ["todos"],
+  props: {
+    todos: Array
+  },
+  computed: {
+    uncompletedtodos() {
+      return _.filter(this.todos, todo => {
+        return !todo.isCompleted;
+      });
+    },
+    completedtodos() {
+      return _.filter(this.todos, todo => {
+        return todo.isCompleted;
+      });
+    }
+  },
   components: {
     AddNewMission,
-    Play
+    Play,
+    TaskList
   }
 };
 </script>
