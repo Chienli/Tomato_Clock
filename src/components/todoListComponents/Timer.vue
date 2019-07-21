@@ -3,9 +3,8 @@
     <div class="halfCircle">
       <div class="time">{{displayTime}}</div>
       <div class="playbtnBox">
-        <!-- duplicated far -->
         <i
-          :class="[isPlay?'far fa-stop-circle':'far fa-play-circle']"
+          :class="['far', isPlay?'fa-stop-circle':'fa-play-circle']"
           @click="$listeners.isPlayChange"
         ></i>
       </div>
@@ -67,9 +66,9 @@ export default {
         cursor: pointer;
       }
     }
-    .title{
-        @include text-base;
-        color: #003164;
+    .title {
+      @include text-base;
+      color: #003164;
     }
   }
 }

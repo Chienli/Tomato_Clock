@@ -10,8 +10,7 @@
           @click="todo.isCompleted? null : $listeners.isCompletedChange($event,todo.timestamp)"
           class="list-title"
         >
-          <!-- <i :class="['fas' , isFold ? 'fa-caret-up' : 'fa-caret-down']"></i> -->
-          <i :class="[todo.isCompleted?'fas fa-circle':'far fa-circle']"></i>
+          <i :class="['fa-circle' ,todo.isCompleted?'fas':'far']"></i>
           <div :class="[todo.isCompleted?'delete':'']">{{todo.title}}</div>
         </div>
         <i :class="[todo.isCompleted?'':'far fa-caret-square-right']"></i>

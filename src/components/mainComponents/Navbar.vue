@@ -1,23 +1,38 @@
 <template>
   <div class="navbar">
     <div class="navtab">
-      <!-- list render -->
-      <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-bars"></i>
-      <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-chart-area"></i>
-      <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-music"></i>
+      <i
+        v-for="(tab,index) in TAB_LIST"
+        :key="index"
+        :class="['fas' , getIcon(tab.icon)]"
+        @click="$listeners.viewChange(VIEW_STATE.TODOLIST)"
+      ></i>
     </div>
     <div class="pomodoro">POMODORO</div>
   </div>
 </template>
 <script>
-import { VIEW_STATE } from "../../constant.js";
+import { VIEW_STATE, TAB_LIST } from "../../constant.js";
 
 export default {
   name: "Navbar",
   data() {
     return {
-      VIEW_STATE
+      VIEW_STATE,
+      TAB_LIST
     };
+  },
+  methods: {
+    getIcon(icon) {
+      switch (icon) {
+        case "menu":
+          return "fa-bars";
+        case "chart":
+          return "fa-chart-area";
+        case "music":
+          return "fa-music";
+      }
+    }
   }
 };
 </script>

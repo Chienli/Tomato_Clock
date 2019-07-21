@@ -1,24 +1,26 @@
 <template>
   <div id="app">
-    <Main
-      v-if="viewState === VIEW_STATE.MAIN"
-      :displayTime="displayTime"
-      :todos="todos"
-      :isPlay="isPlay"
-      @viewChange="handleViewState"
-      @isPlayChange="toggleTimer"
-       @addTodo="addTodo"
-    />
-    <TodoList
-      :todos="todos"
-      @isCompletedChange="handleCompleted"
-      @viewChange="handleViewState"
-      @addTodo="addTodo"
-      :isPlay="isPlay"
-      @isPlayChange="toggleTimer"
-      :displayTime="displayTime"
-      v-else-if="viewState === VIEW_STATE.TODOLIST"
-    />
+    <div class="container">
+      <Main
+        v-if="viewState === VIEW_STATE.MAIN"
+        :displayTime="displayTime"
+        :todos="todos"
+        :isPlay="isPlay"
+        @viewChange="handleViewState"
+        @isPlayChange="toggleTimer"
+        @addTodo="addTodo"
+      />
+      <TodoList
+        :todos="todos"
+        @isCompletedChange="handleCompleted"
+        @viewChange="handleViewState"
+        @addTodo="addTodo"
+        :isPlay="isPlay"
+        @isPlayChange="toggleTimer"
+        :displayTime="displayTime"
+        v-else-if="viewState === VIEW_STATE.TODOLIST"
+      />
+    </div>
   </div>
 </template>
 
@@ -78,11 +80,9 @@ export default {
   computed: {
     displayTime: function() {
       const { remains } = this;
-      // minute
-      // second
-      return `${Math.floor(remains / 60)}:${numeral(remains % 60).format(
-        "00"
-      )}`;
+      const minute = numeral(Math.floor(remains / 60)).format("00");
+      const second = numeral(remains % 60).format("00");
+      return `${minute}:${second}`;
     }
   },
   components: {
@@ -94,10 +94,19 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
-
+body {
+  margin: 0px;
+}
 #app {
-  width: 1280px;
-  height: 800px;
+  width: 100%;
+  height: 100vh;
   background-color: #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    width: 1280px;
+    height: 800px;
+  }
 }
 </style>
