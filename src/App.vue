@@ -34,12 +34,20 @@ import Main from "./views/Main.vue";
 import { VIEW_STATE } from "./constant.js";
 import TodoList from "./views/TodoList.vue";
 import _ from "lodash";
+import { setInterval, clearInterval } from "timers";
 export default {
   name: "app",
   data: function() {
     return {
-      todos: [],
+      todos: [
+        {
+          title: "THE FIRST THING TO DO",
+          timestamp: new Date().getTime(),
+          isCompleted: false
+        }
+      ],
       remains: 1500,
+      intervalId: 0,
       viewState: 0,
       isPlay: false,
       mission: "",
@@ -48,26 +56,30 @@ export default {
   },
   methods: {
     countDown() {
-      // setInterval
       if (this.remains > 0 && this.isPlay) {
         this.remains -= 1;
-        setTimeout(this.countDown, 1000);
       }
     },
     toggleTimer() {
       this.isPlay = !this.isPlay;
-      this.isPlay && this.countDown();
+      if (this.isPlay) {
+        this.intervalId = setInterval(this.countDown, 1000);
+      } else {
+        clearInterval(this.intervalId);
+      }
     },
     handleViewState: function(state) {
       this.viewState = state;
     },
     addTodo(m) {
-      this.todos.push({
-        title: m,
-        timestamp: new Date().getTime(),
-        isCompleted: false
-      });
-      this.mission = "";
+      if (m.trim() !== "") {
+        this.todos.push({
+          title: m,
+          timestamp: new Date().getTime(),
+          isCompleted: false
+        });
+        this.mission = "";
+      }
     },
     handleCompleted(e, timestamp) {
       // const
