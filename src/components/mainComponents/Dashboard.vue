@@ -39,6 +39,7 @@ export default {
     todos: Array
   },
   computed: {
+    // extract it into utils
     uncompletedtodos() {
       return _.filter(this.todos, todo => {
         return !todo.isCompleted;

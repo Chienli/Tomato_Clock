@@ -1,6 +1,7 @@
 <template>
   <div class="tabListBox">
     <div :key="index" v-for="(tab,index) in TAB_LIST" class="tabList">
+      <!-- make class a computed var -->
       <i v-if="tab.icon === 'menu'" class="fas fa-bars"></i>
       <i v-else-if="tab.icon === 'chart'" class="fas fa-chart-area"></i>
       <i v-else-if="tab.icon === 'music'" class="fas fa-music"></i>

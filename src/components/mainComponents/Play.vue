@@ -2,6 +2,7 @@
   <div class="play">
     <div class="circle">
       <div class="btn">
+        <!-- use diff. class by isPlay -->
         <i class="fas fa-play" v-if="!isPlay" @click="$listeners.isPlayChange" />
         <i class="fas fa-equals" v-else-if="isPlay" @click="$listeners.isPlayChange" />
       </div>

@@ -3,6 +3,7 @@
     <div class="halfCircle">
       <div class="time">{{displayTime}}</div>
       <div class="playbtnBox">
+        <!-- duplicated far -->
         <i
           :class="[isPlay?'far fa-stop-circle':'far fa-play-circle']"
           @click="$listeners.isPlayChange"

@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     countDown() {
+      // setInterval
       if (this.remains > 0 && this.isPlay) {
         this.remains -= 1;
         setTimeout(this.countDown, 1000);
@@ -62,6 +63,7 @@ export default {
       e.target.value = "";
     },
     handleCompleted(e, timestamp) {
+      // const
       let newTodos = _.cloneDeep(this.todos);
       _.set(
         _.find(newTodos, todo => {
@@ -76,6 +78,8 @@ export default {
   computed: {
     displayTime: function() {
       const { remains } = this;
+      // minute
+      // second
       return `${Math.floor(remains / 60)}:${numeral(remains % 60).format(
         "00"
       )}`;

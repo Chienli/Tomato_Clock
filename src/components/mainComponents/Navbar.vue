@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navtab">
+      <!-- list render -->
       <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-bars"></i>
       <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-chart-area"></i>
       <i @click="$listeners.viewChange(VIEW_STATE.TODOLIST)" class="fas fa-music"></i>

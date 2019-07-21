@@ -11,7 +11,7 @@
     <div class="rightview">
       <Navbar @viewChange="$listeners.viewChange" />
     </div>
-    <play :isPlay="isPlay" @isPlayChange="$listeners.isPlayChange" />
+    <Play :isPlay="isPlay" @isPlayChange="$listeners.isPlayChange" />
   </div>
 </template>
 <script>
