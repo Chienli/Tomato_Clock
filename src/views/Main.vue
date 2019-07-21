@@ -2,10 +2,12 @@
   <div class="mainview">
     <div class="leftview">
       <Dashboard
-        @viewChange="$listeners.viewChange"
         :todos="todos"
-        @addTodo="$listeners.addTodo"
         :displayTime="displayTime"
+        :mission="mission"
+        @addTodo="$listeners.addTodo"
+        @viewChange="$listeners.viewChange"
+        @missionChange="$listeners.missionChange"
       />
     </div>
     <div class="rightview">
@@ -25,7 +27,8 @@ export default {
   props: {
     todos: Array,
     displayTime: String,
-    isPlay: Boolean
+    isPlay: Boolean,
+    mission: String
   },
   components: {
     Play,

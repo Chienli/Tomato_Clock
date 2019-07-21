@@ -1,6 +1,10 @@
 <template>
   <div class="dashboard">
-    <AddNewMission @addTodo="$listeners.addTodo" />
+    <AddNewMission
+      :mission="mission"
+      @addTodo="$listeners.addTodo"
+      @missionChange="$listeners.missionChange"
+    />
     <div class="timebox">
       <div>{{uncompletedtodos[0] ? uncompletedtodos[0].title : "YOU DON'T HAVE TASK TO DO"}}</div>
       <div>{{displayTime}}</div>
@@ -36,7 +40,8 @@ export default {
   },
   props: {
     displayTime: String,
-    todos: Array
+    todos: Array,
+    mission: String
   },
   computed: {
     // extract it into utils

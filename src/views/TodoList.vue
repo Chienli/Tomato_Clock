@@ -8,7 +8,11 @@
     />
     <TabList />
     <div class="listColumn">
-      <AddNewMission @addTodo="$listeners.addTodo" />
+      <AddNewMission
+        :mission="mission"
+        @addTodo="$listeners.addTodo"
+        @missionChange="$listeners.missionChange"
+      />
       <TaskList
         :title="'TODO'"
         :todos="uncompletedtodos"
@@ -40,7 +44,8 @@ export default {
   props: {
     todos: Array,
     displayTime: String,
-    isPlay: Boolean
+    isPlay: Boolean,
+    mission: String
   },
   computed: {
     // extract it into utils

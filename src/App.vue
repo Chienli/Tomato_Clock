@@ -2,13 +2,15 @@
   <div id="app">
     <div class="container">
       <Main
-        v-if="viewState === VIEW_STATE.MAIN"
         :displayTime="displayTime"
-        :todos="todos"
-        :isPlay="isPlay"
+        v-if="viewState === VIEW_STATE.MAIN"
         @viewChange="handleViewState"
+        :isPlay="isPlay"
         @isPlayChange="toggleTimer"
+        :todos="todos"
         @addTodo="addTodo"
+        :mission="mission"
+        @missionChange="handleMissionChange"
       />
       <TodoList
         :todos="todos"
@@ -19,6 +21,8 @@
         @isPlayChange="toggleTimer"
         :displayTime="displayTime"
         v-else-if="viewState === VIEW_STATE.TODOLIST"
+        :mission="mission"
+        @missionChange="handleMissionChange"
       />
     </div>
   </div>
@@ -38,6 +42,7 @@ export default {
       remains: 1500,
       viewState: 0,
       isPlay: false,
+      mission: "",
       VIEW_STATE
     };
   },
@@ -56,13 +61,13 @@ export default {
     handleViewState: function(state) {
       this.viewState = state;
     },
-    addTodo(e) {
+    addTodo(m) {
       this.todos.push({
-        title: e.target.value,
+        title: m,
         timestamp: new Date().getTime(),
         isCompleted: false
       });
-      e.target.value = "";
+      this.mission = "";
     },
     handleCompleted(e, timestamp) {
       // const
@@ -75,6 +80,10 @@ export default {
         true
       );
       this.todos = newTodos;
+    },
+    handleMissionChange(e) {
+      const { value } = e.target;
+      this.mission = value;
     }
   },
   computed: {

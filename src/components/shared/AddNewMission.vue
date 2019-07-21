@@ -1,12 +1,22 @@
 <template>
   <div class="inputBox">
-    <label for="addNewMission" >+</label>
-    <input @keyup.enter="$listeners.addTodo" type="text" id="addNewMission" placeholder="ADD A NEW MISSION…" />
+    <label @click="$listeners.addTodo(mission)" for="addNewMission">+</label>
+    <input
+      @keyup.enter="$listeners.addTodo(mission)"
+      @input="$listeners.missionChange"
+      :value="mission"
+      type="text"
+      id="addNewMission"
+      placeholder="ADD A NEW MISSION…"
+    />
   </div>
 </template>
 <script>
 export default {
-  name: "addNewMission"
+  name: "addNewMission",
+  props: {
+    mission: String
+  }
 };
 </script>
 <style lang="scss" >
