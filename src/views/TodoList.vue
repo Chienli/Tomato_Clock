@@ -6,12 +6,7 @@
         <div class="playbtnBox"></div>
       </div>
     </div>
-    <div class="tabListBox">
-      <div :key="index" v-for="(tab,index) in TAB_LIST" class="tabList">
-        <div :class="[tab.icon]"></div>
-        <div>{{tab.title}}</div>
-      </div>
-    </div>
+<TabList/>
     <div class="listColumn">
       <AddNewMission @addTodo="$listeners.addTodo" />
       <TaskList
@@ -19,7 +14,7 @@
         :todos="uncompletedtodos"
         @isCompletedChange="$listeners.isCompletedChange"
       />
-      <TaskList  :title="'DONE'" :todos="completedtodos" />
+      <TaskList :title="'DONE'" :todos="completedtodos" />
     </div>
     <div class="navbar">
       <div @click="$listeners.viewChange(VIEW_STATE.MAIN)" class="cross">✖</div>
@@ -32,13 +27,13 @@ import _ from "lodash";
 import AddNewMission from "../components/shared/AddNewMission.vue";
 import Play from "../components/shared/Play.vue";
 import TaskList from "../components/todoListComponents/TaskList.vue";
-import { VIEW_STATE, TAB_LIST } from "../constant.js";
+import TabList from "../components/todoListComponents/TabList.vue";
+import { VIEW_STATE } from "../constant.js";
 
 export default {
   name: "todoList",
   data: function() {
     return {
-      TAB_LIST,
       VIEW_STATE
     };
   },
@@ -60,7 +55,8 @@ export default {
   components: {
     AddNewMission,
     Play,
-    TaskList
+    TaskList,
+    TabList
   }
 };
 </script>
@@ -139,45 +135,6 @@ export default {
       font-size: 24px;
       margin: 0 0 50px 0;
       @include text-base;
-    }
-  }
-  .tabListBox {
-    height: 700px;
-    .tabList {
-      width: 236px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 42px 0;
-      cursor: pointer;
-      img {
-        width: 36px;
-        height: 36px;
-      }
-      div:nth-child(1) {
-        width: 32px;
-        height: 32px;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        &.menu {
-          background-image: url(../../public/menu_pink.png);
-        }
-        &.chart {
-          background-image: url(../../public/chart_pink.png);
-        }
-        &.music {
-          background-image: url(../../public/music_pink.png);
-        }
-      }
-      div:nth-child(2) {
-        @include text-base;
-        width: 192px;
-        font-size: 36px;
-        text-align: left;
-        color: #ff4384;
-      }
     }
   }
 }
