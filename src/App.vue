@@ -7,12 +7,16 @@
       :isPlay="isPlay"
       @viewChange="handleViewState"
       @isPlayChange="toggleTimer"
+       @addTodo="addTodo"
     />
     <TodoList
       :todos="todos"
       @isCompletedChange="handleCompleted"
       @viewChange="handleViewState"
       @addTodo="addTodo"
+      :isPlay="isPlay"
+      @isPlayChange="toggleTimer"
+      :displayTime="displayTime"
       v-else-if="viewState === VIEW_STATE.TODOLIST"
     />
   </div>

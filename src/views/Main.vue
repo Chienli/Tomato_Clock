@@ -1,7 +1,12 @@
 <template>
   <div class="mainview">
     <div class="leftview">
-      <Dashboard :displayTime="displayTime" :todos="todos" />
+      <Dashboard
+        @viewChange="$listeners.viewChange"
+        :todos="todos"
+        @addTodo="$listeners.addTodo"
+        :displayTime="displayTime"
+      />
     </div>
     <div class="rightview">
       <Navbar @viewChange="$listeners.viewChange" />
@@ -10,7 +15,7 @@
   </div>
 </template>
 <script>
-import Play from "../components/shared/Play.vue";
+import Play from "../components/mainComponents/Play.vue";
 import Dashboard from "../components/mainComponents/Dashboard.vue";
 import Navbar from "../components/mainComponents/Navbar.vue";
 

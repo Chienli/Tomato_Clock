@@ -1,12 +1,12 @@
 <template>
   <div class="todoListView">
-    <div class="timerBox">
-      <div class="halfCircle">
-        <div class="time"></div>
-        <div class="playbtnBox"></div>
-      </div>
-    </div>
-<TabList/>
+    <Timer
+      :todos="uncompletedtodos"
+      :displayTime="displayTime"
+      :isPlay="isPlay"
+      @isPlayChange="$listeners.isPlayChange"
+    />
+    <TabList />
     <div class="listColumn">
       <AddNewMission @addTodo="$listeners.addTodo" />
       <TaskList
@@ -25,9 +25,9 @@
 <script>
 import _ from "lodash";
 import AddNewMission from "../components/shared/AddNewMission.vue";
-import Play from "../components/shared/Play.vue";
 import TaskList from "../components/todoListComponents/TaskList.vue";
 import TabList from "../components/todoListComponents/TabList.vue";
+import Timer from "../components/todoListComponents/Timer.vue";
 import { VIEW_STATE } from "../constant.js";
 
 export default {
@@ -38,7 +38,9 @@ export default {
     };
   },
   props: {
-    todos: Array
+    todos: Array,
+    displayTime: String,
+    isPlay: Boolean
   },
   computed: {
     uncompletedtodos() {
@@ -54,9 +56,9 @@ export default {
   },
   components: {
     AddNewMission,
-    Play,
     TaskList,
-    TabList
+    TabList,
+    Timer
   }
 };
 </script>
@@ -81,39 +83,6 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-  }
-  .timerBox {
-    position: absolute;
-    left: 85px;
-    bottom: 0px;
-    .halfCircle {
-      width: 350px;
-      height: 175px;
-      background-color: #ffedf7;
-      border-top-left-radius: 350px;
-      border-top-right-radius: 350px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .time {
-        @include text-base;
-        font-size: 64px;
-        color: #ff4384;
-      }
-      .playbtnBox {
-        position: absolute;
-        top: -60px;
-        left: 115px;
-        width: 120px;
-        height: 120px;
-        border-radius: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #003164;
-      }
-    }
   }
   .navbar {
     width: 36px;

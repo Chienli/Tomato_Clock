@@ -6,7 +6,10 @@
     </div>
     <div :class="['taskList-body', isFold ? 'hidden' : '']">
       <div v-for="(todo,index) in todos" :key="index" class="list">
-        <div @click="$listeners.isCompletedChange($event,todo.timestamp)" class="list-title">
+        <div
+          @click="todo.isCompleted? null : $listeners.isCompletedChange($event,todo.timestamp)"
+          class="list-title"
+        >
           <i :class="[todo.isCompleted?'fas fa-circle':'far fa-circle']"></i>
           <div :class="[todo.isCompleted?'delete':'']">{{todo.title}}</div>
         </div>
